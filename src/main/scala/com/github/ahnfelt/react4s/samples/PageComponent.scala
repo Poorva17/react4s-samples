@@ -13,6 +13,7 @@ case class PageComponent(page : P[Page]) extends Component[NoEmit] {
         get(page) match {
             case MainPage => renderMainPage()
             case TodoListPage => renderTodoListPage()
+            case CssClassPage => renderCssClassPage()
             case SpotifyPage => renderSpotifyPage()
             case TimerPage => renderTimerPage()
             case WebSocketsPage => renderWebSocketsPage()
@@ -162,6 +163,33 @@ case class TodoListComponent() extends Component[NoEmit] {
             E.div(
                 ResultColumnCss,
                 Component(TodoListComponent)
+            )
+        )
+    }
+
+    def renderCssClassPage() = {
+        E.div(
+            ContentColumnCss,
+            E.div(
+                CodeColumnCss,
+                Text("This example shows a simple CSS class with a :hover effect. All links on this site uses it."),
+                Component(CodeComponent, """
+object LinkCss extends CssClass(
+    S.color.rgb(202, 88, 152),
+    S.textDecoration.none(),
+    S.cursor.pointer(),
+    Css.hover(
+        S.textDecoration("underline")
+    )
+)
+                """),
+                E.div(SpacerCss),
+            ),
+            E.div(
+                ResultColumnCss,
+                E.h3(
+                    E.a(A.href("http://www.react4s.org/"), LinkCss, Text("react4s.org"))
+                )
             )
         )
     }
