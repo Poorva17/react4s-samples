@@ -96,14 +96,7 @@ object MenuEntryCss extends CssClass(
     S.color(Palette.White.accent),
 )
 
-object LinkCss extends CssClass(
-    S.color(Palette.White.accent),
-    S.textDecoration.none(),
-    S.cursor.pointer(),
-    Css.hover(
-        S.textDecoration("underline")
-    )
-)
+
 
 object CodeCss extends CssClass(
     S.backgroundColor(Palette.White.background),

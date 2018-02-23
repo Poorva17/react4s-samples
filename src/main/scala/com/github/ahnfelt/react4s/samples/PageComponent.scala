@@ -82,6 +82,7 @@ case class SpotifyComponent() extends Component[NoEmit] {
 }
                 """),
                 E.div(SpacerCss),
+                sourceLink("spotify"),
             ),
             E.div(
                 ResultColumnCss,
@@ -118,6 +119,7 @@ case class TimerComponent() extends Component[NoEmit] {
 }
                 """),
                 E.div(SpacerCss),
+                sourceLink("timer"),
             ),
             E.div(
                 ResultColumnCss,
@@ -159,6 +161,7 @@ case class TodoListComponent() extends Component[NoEmit] {
 }
                 """),
                 E.div(SpacerCss),
+                sourceLink("todolist"),
             ),
             E.div(
                 ResultColumnCss,
@@ -184,6 +187,7 @@ object LinkCss extends CssClass(
 )
                 """),
                 E.div(SpacerCss),
+                sourceLink("theme/LinkCss.scala"),
             ),
             E.div(
                 ResultColumnCss,
@@ -241,6 +245,7 @@ case class WebSocketsComponent() extends Component[NoEmit] {
 }
                 """),
                 E.div(SpacerCss),
+                sourceLink("websockets"),
             ),
             E.div(
                 ResultColumnCss,
@@ -282,6 +287,12 @@ FancyButton(
                 Text("No preview")
             )
         )
+    }
+
+    def sourceLink(suffix : String) = {
+        val prefix = "https://github.com/Ahnfelt/react4s-samples/blob/master/src/main/scala/com/github/ahnfelt/react4s/samples/"
+        val url = prefix + suffix
+        E.a(A.target("_blank"), A.href(url), LinkCss, Text("Full source code: " + suffix))
     }
 
 }
