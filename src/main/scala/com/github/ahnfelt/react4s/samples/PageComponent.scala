@@ -205,7 +205,7 @@ case class TreeRootComponent(nodes : P[List[TreeNode]]) extends Component[NoEmit
         E.ul(Tags(
             for((item, index) <- get(children).zipWithIndex) yield E.li(
                 Component(TreeNodeComponent, item).withHandler { e =>
-                    children.modify(TreeNodeComponent.update(_, e, index))
+                    children.modify(TreeEvent.update(_, e, index))
                 }
             )
         ))
@@ -236,7 +236,7 @@ case class TreeNodeComponent(node : P[TreeNode]) extends Component[TreeEvent] {
         E.ul(Tags(
             for((item, index) <- nodes.zipWithIndex) yield E.li(
                 Component(TreeNodeComponent, item).withHandler { e =>
-                    val newChildren = TreeNodeComponent.update(nodes, e, index)
+                    val newChildren = TreeEvent.update(nodes, e, index)
                     emit(SetChildren(newChildren))
                 }
             )
@@ -246,34 +246,40 @@ case class TreeNodeComponent(node : P[TreeNode]) extends Component[TreeEvent] {
                 E.div(SpacerCss),
                 Text("Finally, a helper function to update a list of children based on one of the events:"),
                 Component(CodeComponent, """
-object TreeNodeComponent {
+object TreeEvent {
 
     def update(children : List[TreeNode], event : TreeEvent, index : Int) =
-        event match {
-        case SetLabel(label) =>
-            children.zipWithIndex.map {
-                case (c, i) if i == index => c.copy(label = label)
-                case (c, _) => c
-            }
-        case SetChildren(grandChildren) =>
-            children.zipWithIndex.map {
-                case (c, i) if i == index => c.copy(children = grandChildren)
-                case (c, _) => c
-            }
-        case MoveUp =>
-            if(index == 0) children
-            else children.
-                updated(index, children(index - 1)).
-                updated(index - 1, children(index))
-        case MoveDown =>
-            if(index >= children.size - 1) children
-            else children.
-                updated(index, children(index + 1)).
-                updated(index + 1, children(index))
-        case Delete =>
-            children.take(index) ++
-                children.drop(index + 1)
+    event match {
+
+    case SetLabel(label) =>
+        children.zipWithIndex.map {
+            case (c, i) if i == index => c.copy(label = label)
+            case (c, _) => c
         }
+
+    case SetChildren(grandChildren) =>
+        children.zipWithIndex.map {
+            case (c, i) if i == index => c.copy(children = grandChildren)
+            case (c, _) => c
+        }
+
+    case MoveUp =>
+        if(index == 0) children
+        else children.
+            updated(index, children(index - 1)).
+            updated(index - 1, children(index))
+
+    case MoveDown =>
+        if(index >= children.size - 1) children
+        else children.
+            updated(index, children(index + 1)).
+            updated(index + 1, children(index))
+
+    case Delete =>
+        children.take(index) ++
+            children.drop(index + 1)
+
+    }
 }
                 """),
                 E.div(SpacerCss),

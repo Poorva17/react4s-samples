@@ -24,39 +24,9 @@ case class TreeNodeComponent(node : P[TreeNode]) extends Component[TreeEvent] {
         E.ul(Tags(
             for((item, index) <- nodes.zipWithIndex) yield E.li(
                 Component(TreeNodeComponent, item).withHandler { e =>
-                    val newChildren = TreeNodeComponent.update(nodes, e, index)
+                    val newChildren = TreeEvent.update(nodes, e, index)
                     emit(SetChildren(newChildren))
                 }
             )
         ))
-}
-
-object TreeNodeComponent {
-
-    def update(children : List[TreeNode], event : TreeEvent, index : Int) =
-        event match {
-            case SetLabel(label) =>
-                children.zipWithIndex.map {
-                    case (c, i) if i == index => c.copy(label = label)
-                    case (c, _) => c
-                }
-            case SetChildren(grandChildren) =>
-                children.zipWithIndex.map {
-                    case (c, i) if i == index => c.copy(children = grandChildren)
-                    case (c, _) => c
-                }
-            case MoveUp =>
-                if(index == 0) children
-                else children.
-                    updated(index, children(index - 1)).
-                    updated(index - 1, children(index))
-            case MoveDown =>
-                if(index >= children.size - 1) children
-                else children.
-                    updated(index, children(index + 1)).
-                    updated(index + 1, children(index))
-            case Delete =>
-                children.take(index) ++
-                    children.drop(index + 1)
-        }
 }

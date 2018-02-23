@@ -11,7 +11,7 @@ case class TreeRootComponent(nodes : P[List[TreeNode]]) extends Component[NoEmit
         E.ul(Tags(
             for((item, index) <- get(children).zipWithIndex) yield E.li(
                 Component(TreeNodeComponent, item).withHandler { e =>
-                    children.modify(TreeNodeComponent.update(_, e, index))
+                    children.modify(TreeEvent.update(_, e, index))
                 }
             )
         ))
