@@ -2,9 +2,6 @@ package com.github.ahnfelt.react4s.samples.todolist
 
 import com.github.ahnfelt.react4s._
 
-import scala.scalajs.js
-import scala.scalajs.js.timers.SetIntervalHandle
-
 case class TodoListComponent() extends Component[NoEmit] {
 
     val text = State("")
