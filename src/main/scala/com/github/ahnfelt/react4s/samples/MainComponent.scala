@@ -30,6 +30,7 @@ case class MainComponent() extends Component[NoEmit] {
                     E.div(
                         E.div(Text("Examples"), MenuCategoryCss),
                         E.div(Text("Todo list"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(TodoListPage))),
+                        E.div(Text("Tree editor"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(TreeEditorPage))),
                         E.div(Text("Css class"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(CssClassPage))),
                         E.div(Text("Spotify search"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(SpotifyPage))),
                         E.div(Text("Timer"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(TimerPage))),

@@ -5,6 +5,7 @@ import com.github.ahnfelt.react4s.samples.spotify.SpotifyComponent
 import com.github.ahnfelt.react4s.samples.theme._
 import com.github.ahnfelt.react4s.samples.timer.TimerComponent
 import com.github.ahnfelt.react4s.samples.todolist.TodoListComponent
+import com.github.ahnfelt.react4s.samples.treeeditor.{TreeNode, TreeNodeComponent, TreeRootComponent}
 import com.github.ahnfelt.react4s.samples.websockets.WebSocketsComponent
 
 case class PageComponent(page : P[Page]) extends Component[NoEmit] {
@@ -13,6 +14,7 @@ case class PageComponent(page : P[Page]) extends Component[NoEmit] {
         get(page) match {
             case MainPage => renderMainPage()
             case TodoListPage => renderTodoListPage()
+            case TreeEditorPage => renderTreeEditorPage()
             case CssClassPage => renderCssClassPage()
             case SpotifyPage => renderSpotifyPage()
             case TimerPage => renderTimerPage()
@@ -170,6 +172,144 @@ case class TodoListComponent() extends Component[NoEmit] {
         )
     }
 
+    def renderTreeEditorPage() = {
+        E.div(
+            ContentColumnCss,
+            E.div(
+                CodeColumnCss,
+                Text("This example shows how to emit messages from components and handle them."),
+                E.div(SpacerCss),
+                Text("First we'll need a data structure for the tree nodes and for tree node events:"),
+                Component(CodeComponent, """
+case class TreeNode(
+    label : String,
+    children : List[TreeNode]
+)
+
+sealed trait TreeEvent
+case class SetLabel(label : String) extends TreeEvent
+case class SetChildren(children : List[TreeNode]) extends TreeEvent
+case object MoveUp extends TreeEvent
+case object MoveDown extends TreeEvent
+case object Delete extends TreeEvent
+                """),
+                E.div(SpacerCss),
+                Text("Then we'll need a root component, to hold the state of the tree:"),
+                Component(CodeComponent, """
+case class TreeRootComponent(nodes : P[List[TreeNode]]) extends Component[NoEmit] {
+
+    val children = State.of(nodes)
+
+    override def render(get : Get) = E.div(
+        E.h3(Text("Tree editor")),
+        E.ul(Tags(
+            for((item, index) <- get(children).zipWithIndex) yield E.li(
+                Component(TreeNodeComponent, item).withHandler { e =>
+                    children.modify(TreeNodeComponent.update(_, e, index))
+                }
+            )
+        ))
+    )
+}
+                """),
+                E.div(SpacerCss),
+                Text("Then a component to model each node in the tree:"),
+                Component(CodeComponent, """
+case class TreeNodeComponent(node : P[TreeNode]) extends Component[TreeEvent] {
+
+    override def render(get : Get) =
+        E.div(
+            E.input(A.onChangeText(t => emit(SetLabel(t))), A.value(get(node).label)),
+            renderButton("chevron-up", MoveUp),
+            renderButton("chevron-down", MoveDown),
+            renderButton("trash", Delete),
+            renderButton("plus-circle", SetChildren(get(node).children :+ TreeNode("", List()))),
+            renderTodoList(get(node).children),
+        )
+
+    def renderButton(icon : String, event : TreeEvent) = E.span(
+        S.paddingLeft.px(5),
+        E.i(A.className("fa fa-" + icon), LinkCss, A.onLeftClick(_ => emit(event)))
+    )
+
+    def renderTodoList(nodes : List[TreeNode]) =
+        E.ul(Tags(
+            for((item, index) <- nodes.zipWithIndex) yield E.li(
+                Component(TreeNodeComponent, item).withHandler { e =>
+                    val newChildren = TreeNodeComponent.update(nodes, e, index)
+                    emit(SetChildren(newChildren))
+                }
+            )
+        ))
+}
+                """),
+                E.div(SpacerCss),
+                Text("Finally, a helper function to update a list of children based on one of the events:"),
+                Component(CodeComponent, """
+object TreeNodeComponent {
+
+    def update(children : List[TreeNode], event : TreeEvent, index : Int) =
+        event match {
+        case SetLabel(label) =>
+            children.zipWithIndex.map {
+                case (c, i) if i == index => c.copy(label = label)
+                case (c, _) => c
+            }
+        case SetChildren(grandChildren) =>
+            children.zipWithIndex.map {
+                case (c, i) if i == index => c.copy(children = grandChildren)
+                case (c, _) => c
+            }
+        case MoveUp =>
+            if(index == 0) children
+            else children.
+                updated(index, children(index - 1)).
+                updated(index - 1, children(index))
+        case MoveDown =>
+            if(index >= children.size - 1) children
+            else children.
+                updated(index, children(index + 1)).
+                updated(index + 1, children(index))
+        case Delete =>
+            children.take(index) ++
+                children.drop(index + 1)
+        }
+}
+                """),
+                E.div(SpacerCss),
+                sourceLink("treeeditor"),
+            ),
+            E.div(
+                ResultColumnCss,
+                Component(TreeRootComponent, List(
+                    TreeNode("Pantherinae", List(
+                        TreeNode("Panthera", List(
+                            TreeNode("Tiger", List()),
+                            TreeNode("Lion", List()),
+                            TreeNode("Jaguar", List()),
+                            TreeNode("Leopard", List()),
+                        )),
+                    )),
+                    TreeNode("Felinae", List(
+                        TreeNode("Lynx", List(
+                            TreeNode("Canadian lynx", List()),
+                            TreeNode("Eurasian lynx", List()),
+                            TreeNode("Iberian lynx", List()),
+                            TreeNode("Bobcat", List()),
+                        )),
+                        TreeNode("Puma", List(
+                            TreeNode("Cougar", List()),
+                            TreeNode("Eyra", List()),
+                        )),
+                        TreeNode("Acinonyx", List(
+                            TreeNode("Cheetah", List()),
+                        )),
+                    )),
+                ))
+            )
+        )
+    }
+
     def renderCssClassPage() = {
         E.div(
             ContentColumnCss,
@@ -185,6 +325,11 @@ object LinkCss extends CssClass(
         S.textDecoration("underline")
     )
 )
+                """),
+                E.div(SpacerCss),
+                Text("The class is attached to an element just like a style, attribute or child node:"),
+                Component(CodeComponent, """
+E.a(LinkCss, A.href("http://www.react4s.org/"), Text("react4s.org"))
                 """),
                 E.div(SpacerCss),
                 sourceLink("theme/LinkCss.scala"),
