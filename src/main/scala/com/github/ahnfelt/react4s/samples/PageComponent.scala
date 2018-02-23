@@ -249,7 +249,7 @@ case class TreeNodeComponent(node : P[TreeNode]) extends Component[TreeEvent] {
 object TreeEvent {
 
     def update(children : List[TreeNode], event : TreeEvent, index : Int) =
-    event match {
+        event match {
 
     case SetLabel(label) =>
         children.zipWithIndex.map {
@@ -264,20 +264,20 @@ object TreeEvent {
         }
 
     case MoveUp =>
-        if(index == 0) children
+        if(index - 1 < 0) children
         else children.
             updated(index, children(index - 1)).
             updated(index - 1, children(index))
 
     case MoveDown =>
-        if(index >= children.size - 1) children
+        if(index + 1 >= children.size) children
         else children.
             updated(index, children(index + 1)).
             updated(index + 1, children(index))
 
     case Delete =>
         children.take(index) ++
-            children.drop(index + 1)
+        children.drop(index + 1)
 
     }
 }
