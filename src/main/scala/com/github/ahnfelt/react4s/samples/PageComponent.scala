@@ -292,7 +292,10 @@ FancyButton(
     def sourceLink(suffix : String) = {
         val prefix = "https://github.com/Ahnfelt/react4s-samples/blob/master/src/main/scala/com/github/ahnfelt/react4s/samples/"
         val url = prefix + suffix
-        E.a(A.target("_blank"), A.href(url), LinkCss, Text("Full source code: " + suffix))
+        E.div(
+            E.a(A.target("_blank"), A.href(url), LinkCss, Text("Full source code: " + suffix)),
+            E.div(SpacerCss),
+        )
     }
 
 }

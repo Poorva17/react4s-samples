@@ -25,7 +25,7 @@ case class SpotifyComponent() extends Component[NoEmit] {
     }
 
     override def render(get : Get) = {
-        E.form(
+        E.div(
             E.h3(Text("Search in Spotify artists")),
             E.input(A.value(get(query)), A.onChangeText(query.set)),
             Text(" loading ... ").when(get(artists.loading)),
