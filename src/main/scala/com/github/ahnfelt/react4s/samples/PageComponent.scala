@@ -410,7 +410,7 @@ case class WebSocketsComponent() extends Component[NoEmit] {
             ContentColumnCss,
             E.div(
                 CodeColumnCss,
-                Text("This example shows how to use a component that was defined in plan React in JavaScript."),
+                Text("This example shows how to use a component that was defined in plain JavaScript+React."),
                 Component(CodeComponent, """
 object FancyButton extends JsComponent(js.Dynamic.global.FancyButton)
 
