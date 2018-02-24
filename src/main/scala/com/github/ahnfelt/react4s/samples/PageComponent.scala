@@ -44,8 +44,7 @@ case class SpotifyComponent() extends Component[NoEmit] {
 
     val artists = Loader(this, debouncedQuery) { q =>
         if(q.trim.isEmpty) Future.successful(js.Array[Artist]()) else {
-            val proxy = "http://show.ahnfelt.net/react4s-spotify/?q="
-            Ajax.get(proxy + js.URIUtils.encodeURIComponent(q)).
+            Ajax.get("/spotify/?q=" + js.URIUtils.encodeURIComponent(q)).
                 map { ajax =>
                     js.JSON.parse(ajax.responseText).
                         artists.items.
@@ -55,7 +54,7 @@ case class SpotifyComponent() extends Component[NoEmit] {
     }
 
     override def render(get : Get) = {
-        E.form(
+        E.div(
             E.h3(Text("Search in Spotify artists")),
             E.input(A.value(get(query)), A.onChangeText(query.set)),
             Text(" loading ... ").when(get(artists.loading)),
