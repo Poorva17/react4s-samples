@@ -179,7 +179,7 @@ case class TodoListComponent() extends Component[NoEmit] {
                 CodeColumnCss,
                 Text("This example shows how to emit messages from components and handle them."),
                 E.div(SpacerCss),
-                Text("First we'll need a data structure for the tree nodes and for tree node events:"),
+                Text("First we'll need a data structure for the tree nodes and for tree node messages:"),
                 Component(CodeComponent, """
 case class TreeNode(
     label : String,
