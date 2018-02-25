@@ -110,6 +110,18 @@ object CodeCss extends CssClass(
     S.overflowX("auto"),
 )
 
+object CodeButtonCss extends CssClass(
+    S.position.absolute(),
+    S.top.px(-10),
+    S.right.px(20),
+    S.padding.px(2).px(5),
+    S.backgroundColor(Palette.White.accent),
+    S.color("white"),
+    S.fontSize.px(14),
+    S.textTransform("uppercase"),
+    S.cursor.pointer(),
+)
+
 object SpacerCss extends CssClass(
     S.height.px(20)
 )
