@@ -28,7 +28,7 @@ object CodeColumnCss extends CssClass(
     S.padding.px(20),
     S.fontFamily("Verdana"),
     S.fontSize.px(16),
-    S.color(Palette.White.text),
+    S.color(Palette.text),
 )
 
 object ResultColumnCss extends CssClass(
@@ -38,7 +38,7 @@ object ResultColumnCss extends CssClass(
     S.padding.px(20),
     S.fontFamily("Verdana"),
     S.fontSize.px(16),
-    S.color(Palette.White.text),
+    S.color(Palette.text),
 )
 
 object ColumnContainerCss extends CssClass(
@@ -50,8 +50,8 @@ object ColumnContainerCss extends CssClass(
 )
 
 object TopBarCss extends CssClass(
-    S.borderTop("5px solid " + Palette.White.accent),
-    S.backgroundColor(Palette.White.background),
+    S.borderTop("5px solid " + Palette.accent),
+    S.backgroundColor(Palette.background),
     S.boxShadow("0 2px 5px rgba(0, 0, 0, 0.3)"),
     S.boxSizing.borderBox(),
     S.position.absolute(),
@@ -69,7 +69,7 @@ object BrandTextCss extends CssClass(
 
 object BrandTitleCss extends CssClass(
     BrandTextCss,
-    S.color(Palette.White.accent),
+    S.color(Palette.accent),
     S.paddingLeft.px(50),
     S.fontSize.px(20),
 )
@@ -85,7 +85,7 @@ object MenuCategoryCss extends CssClass(
     S.textTransform("uppercase"),
     S.fontFamily("Verdana"),
     S.fontSize.px(14),
-    S.color(Palette.White.text)
+    S.color(Palette.text)
 )
 
 object MenuEntryCss extends CssClass(
@@ -93,14 +93,14 @@ object MenuEntryCss extends CssClass(
     S.paddingLeft.px(20),
     S.fontFamily("Verdana"),
     S.fontSize.px(16),
-    S.color(Palette.White.accent),
+    S.color(Palette.accent),
 )
 
 
 
 object CodeCss extends CssClass(
-    S.backgroundColor(Palette.White.background),
-    S.color(Palette.White.accent),
+    S.backgroundColor(Palette.background),
+    S.color(Palette.accent),
     S.boxShadow("0 1px 2px rgba(0, 0, 0, 0.3)"),
     S.margin.px(10),
     S.padding.px(10),
@@ -115,8 +115,8 @@ object CodeButtonCss extends CssClass(
     S.top.px(-10),
     S.right.px(20),
     S.padding.px(1).px(4),
-    S.color(Palette.White.accent),
-    S.backgroundColor(Palette.White.background),
+    S.color(Palette.accent),
+    S.backgroundColor(Palette.background),
     S.boxShadow("0 1px 2px rgba(0, 0, 0, 0.3)"),
     S.fontSize.px(14),
     S.textTransform("uppercase"),

@@ -41,7 +41,11 @@ case class CodeLoaderComponent(path : P[String], symbol : P[Option[String]]) ext
             ),
             E.div(
                 CodeCss,
-                Text(get(loader).map(filterCode(get, _)).getOrElse("Loading..."))
+                Text(
+                    if(get(loader.loading)) "Loading..."
+                    else if(get(loader.error).nonEmpty) "Error loading:\n" + url(get)
+                    else get(loader).map(filterCode(get, _)).getOrElse("")
+                )
             )
         )
     }
