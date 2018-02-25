@@ -2,10 +2,8 @@ package com.github.ahnfelt.react4s.samples
 
 import com.github.ahnfelt.react4s._
 
-import scala.scalajs.js
-
-object Main extends js.JSApp {
-    def main() : Unit = {
+object Main {
+    def main(arguments : Array[String]) : Unit = {
         val component = Component(MainComponent)
         ReactBridge.renderToDomById(component, "main")
     }

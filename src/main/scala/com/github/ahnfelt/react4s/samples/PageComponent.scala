@@ -12,7 +12,9 @@ case class PageComponent(page : P[Page]) extends Component[NoEmit] {
 
     override def render(get : Get) : Element = {
         get(page) match {
-            case MainPage => renderMainPage()
+            case OverviewPage => renderMainPage()
+            case MinimalProjectPage => renderMinimalProjectPage()
+            case GotchasPage => renderGotchasPage()
             case TodoListPage => renderTodoListPage()
             case TreeEditorPage => renderTreeEditorPage()
             case CssClassPage => renderCssClassPage()
@@ -27,6 +29,113 @@ case class PageComponent(page : P[Page]) extends Component[NoEmit] {
     def renderMainPage() = {
         E.div(
             ContentColumnCss,
+            E.div(
+                CodeColumnCss,
+                Text("React4s is a Scala library for frontend UI. It wraps Facebook's React library. It exposes an API that makes it easy to write plain and simple Scala code for your components. You get the indispensable shouldComponentUpdate() for free, no callback memoization required. It uses no macros, no implicits and no complicated types."),
+                E.div(SpacerCss),
+                E.div(Text("You can get a quick introduction in the "), E.a(LinkCss, A.target("_blank"), A.href("https://github.com/Ahnfelt/react4s/blob/master/README.md"), Text("readme")), Text(".")),
+                E.div(SpacerCss),
+            ),
+            E.div(
+                ResultColumnCss,
+            )
+        )
+    }
+
+    def renderMinimalProjectPage() = {
+        E.div(
+            ContentColumnCss,
+            E.div(
+                CodeColumnCss,
+                Text("React4s projects typically start with 5 files like the ones below, 4 of which you need for any Scala.js application. If you'd rather begin from an existing project, you can simple clone the "),
+                E.a(LinkCss, A.href("https://github.com/ahnfelt/react4s-samples"), Text("react4s.org source code")), Text("."),
+                E.div(SpacerCss),
+                Text("project/plugins.sbt"),
+                Component(CodeComponent, """
+addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.22")
+                """),
+                E.div(SpacerCss),
+                Text("build.sbt"),
+                Component(CodeComponent, """
+enablePlugins(ScalaJSPlugin)
+scalaJSUseMainModuleInitializer := true
+scalaVersion := "2.12.4"
+
+resolvers += Resolver.sonatypeRepo("snapshots")
+libraryDependencies += "com.github.ahnfelt" %%% "react4s" % "0.9.2-SNAPSHOT"
+                """),
+                E.div(SpacerCss),
+                Text("index.html"),
+                Component(CodeComponent, """
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>example</title>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    </head>
+    <body style="padding: 0; margin: 0">
+        <div id="main"></div>
+        <script src="target/scala-2.12/example-fastopt.js"></script>
+    </body>
+</html>
+                """),
+                E.div(SpacerCss),
+                Text("src/main/scala/com/example/Main.scala"),
+                Component(CodeComponent, """
+package com.example
+
+import com.github.ahnfelt.react4s._
+
+object Main {
+    def main(arguments : Array[String]) : Unit = {
+        val component = Component(MainComponent)
+        ReactBridge.renderToDomById(component, "main")
+    }
+}
+                """),
+                E.div(SpacerCss),
+                Text("src/main/scala/com/example/MainComponent.scala"),
+                Component(CodeComponent, """
+package com.example
+
+import com.github.ahnfelt.react4s._
+
+case class MainComponent() extends Component[NoEmit] {
+    override def render(get : Get) = {
+        E.div(Text("Hello world!"))
+    }
+}
+                """),
+                E.div(SpacerCss),
+            ),
+            E.div(
+                ResultColumnCss,
+            )
+        )
+    }
+
+    def renderGotchasPage() = {
+        E.div(
+            ContentColumnCss,
+            E.div(
+                CodeColumnCss,
+                Text("All libraries has gotchas, but they're not always documented. While they may be seen to reflect poorly on the library, maybe it's much worse if they're hidden away for the programmer to discover after the fact. With that in mind, here is the complete list of known gotchas for React4s:"),
+                E.div(SpacerCss),
+                E.div(Text("Functions as props"), S.fontWeight.bold()),
+                Text("React4s relies on == to implement shouldComponentUpdate. Since == will only check reference equality for functions, the component will update more often than necessary if passing in functions as arguments, unless you jump through hoops to avoid reallocating functions. All this trouble can be avoided simply by using emit() instead of callbacks."),
+                E.div(SpacerCss),
+                E.div(Text("Mutable props"), S.fontWeight.bold()),
+                Text("React4s relies on == to implement shouldComponentUpdate. For mutable objects, even if == returns true, a rerendering may be necessary, since the object might have been updated regardless. This will result in a stale view. Please use only immutable values as props."),
+                E.div(SpacerCss),
+                E.div(Text("Updating state in the constructor or during render()"), S.fontWeight.bold()),
+                Text("React will throw an exception if you update state during these. Note that it's perfectly OK to update state in event handlers that are attached during render(), eg. A.onSubmit(...), since this delays the state update until the specified event occurs."),
+                E.div(SpacerCss),
+            ),
+            E.div(
+                ResultColumnCss,
+            )
         )
     }
 

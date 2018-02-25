@@ -23,10 +23,12 @@ case class MainComponent() extends Component[NoEmit] {
                 ColumnContainerCss,
                 E.div(
                     MenuColumnCss,
-                    /*E.div(
-                        E.div(Text("Introduction"), MenuCategoryCss),
-                        E.div(Text("Overview"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(MainPage))),
-                    ),*/
+                    E.div(
+                        E.div(Text("Usage"), MenuCategoryCss),
+                        E.div(Text("Overview"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(OverviewPage))),
+                        E.div(Text("Minimal project"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(MinimalProjectPage))),
+                        E.div(Text("Gotchas"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(GotchasPage))),
+                    ),
                     E.div(
                         E.div(Text("Examples"), MenuCategoryCss),
                         E.div(Text("Todo list"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(TodoListPage))),

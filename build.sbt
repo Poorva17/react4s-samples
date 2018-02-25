@@ -9,3 +9,5 @@ libraryDependencies += "com.github.ahnfelt" %%% "react4s" % "0.9.2-SNAPSHOT"
 libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.9.2"
 
 scalaVersion := "2.12.4"
+
+scalaJSUseMainModuleInitializer := true
