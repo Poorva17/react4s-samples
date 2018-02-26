@@ -6,7 +6,7 @@ import com.github.ahnfelt.react4s.samples.theme._
 case class CodeComponent(code : P[String]) extends Component[NoEmit] {
 
     override def render(get : Get) : Element = {
-        E.div(
+        E.pre(
             CodeCss,
             Text(get(code).trim)
         )

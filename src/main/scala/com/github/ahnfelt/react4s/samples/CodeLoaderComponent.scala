@@ -39,7 +39,7 @@ case class CodeLoaderComponent(path : P[String], symbol : P[Option[String]]) ext
                 Text(if(get(showImports)) "Hide imports" else "Show imports"),
                 A.onLeftClick(_ => showImports.modify(!_))
             ),
-            E.div(
+            E.pre(
                 CodeCss,
                 Text(
                     if(get(loader.loading)) "Loading..."
