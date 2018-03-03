@@ -5,7 +5,7 @@ import com.github.ahnfelt.react4s.samples.theme._
 import org.scalajs.dom.ext.Ajax
 import scala.concurrent.ExecutionContext.Implicits.global
 
-case class CodeLoaderComponent(path : P[String], symbol : P[Option[String]]) extends Component[NoEmit] {
+case class CodeLoaderComponent(path : P[String], symbol : P[Option[String]], highlight : P[Boolean]) extends Component[NoEmit] {
 
     var showImports = State(false)
 
@@ -39,14 +39,9 @@ case class CodeLoaderComponent(path : P[String], symbol : P[Option[String]]) ext
                 Text(if(get(showImports)) "Hide imports" else "Show imports"),
                 A.onLeftClick(_ => showImports.modify(!_))
             ),
-            E.pre(
-                CodeCss,
-                Text(
-                    if(get(loader.loading)) "Loading..."
-                    else if(get(loader.error).nonEmpty) "Error loading:\n" + url(get)
-                    else get(loader).map(filterCode(get, _)).getOrElse("")
-                )
-            )
+            if(get(loader.loading)) E.pre(CodeCss, Text("Loading..."))
+            else if(get(loader.error).nonEmpty) E.pre(CodeCss, Text("Error loading:\n" + url(get)))
+            else Component(CodeComponent, get(loader).map(filterCode(get, _)).getOrElse(""), get(highlight))
         )
     }
 }

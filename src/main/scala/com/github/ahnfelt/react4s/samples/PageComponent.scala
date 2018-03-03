@@ -53,7 +53,7 @@ case class PageComponent(page : P[Page]) extends Component[NoEmit] {
                 Text("project/plugins.sbt"),
                 Component(CodeComponent, """
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.22")
-                """),
+                """, false),
                 E.div(SpacerCss),
                 Text("build.sbt"),
                 Component(CodeComponent, """
@@ -63,7 +63,7 @@ scalaVersion := "2.12.4"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 libraryDependencies += "com.github.ahnfelt" %%% "react4s" % "0.9.4-SNAPSHOT"
-                """),
+                """, false),
                 E.div(SpacerCss),
                 Text("index.html"),
                 Component(CodeComponent, """
@@ -80,7 +80,7 @@ libraryDependencies += "com.github.ahnfelt" %%% "react4s" % "0.9.4-SNAPSHOT"
         <script src="target/scala-2.12/example-fastopt.js"></script>
     </body>
 </html>
-                """),
+                """, false),
                 E.div(SpacerCss),
                 Text("src/main/scala/com/example/Main.scala"),
                 Component(CodeComponent, """
@@ -94,7 +94,7 @@ object Main {
         ReactBridge.renderToDomById(component, "main")
     }
 }
-                """),
+                """, false),
                 E.div(SpacerCss),
                 Text("src/main/scala/com/example/MainComponent.scala"),
                 Component(CodeComponent, """
@@ -107,7 +107,7 @@ case class MainComponent() extends Component[NoEmit] {
         E.div(Text("Hello world!"))
     }
 }
-                """),
+                """, false),
                 E.div(SpacerCss),
             ),
             E.div(
@@ -148,7 +148,7 @@ case class MainComponent() extends Component[NoEmit] {
             E.div(
                 CodeColumnCss,
                 Text("This example shows how to use debouncing and AJAX."),
-                Component(CodeLoaderComponent, "spotify/SpotifyComponent.scala", None),
+                Component(CodeLoaderComponent, "spotify/SpotifyComponent.scala", None, true),
                 E.div(SpacerCss),
                 sourceLink("spotify"),
             ),
@@ -165,7 +165,7 @@ case class MainComponent() extends Component[NoEmit] {
             E.div(
                 CodeColumnCss,
                 Text("This example shows how many seconds elapsed so far."),
-                Component(CodeLoaderComponent, "timer/TimerComponent.scala", None),
+                Component(CodeLoaderComponent, "timer/TimerComponent.scala", None, true),
                 E.div(SpacerCss),
                 sourceLink("timer"),
             ),
@@ -182,7 +182,7 @@ case class MainComponent() extends Component[NoEmit] {
             E.div(
                 CodeColumnCss,
                 Text("This example shows a simple TODO list."),
-                Component(CodeLoaderComponent, "todolist/TodoListComponent.scala", None),
+                Component(CodeLoaderComponent, "todolist/TodoListComponent.scala", None, true),
                 E.div(SpacerCss),
                 sourceLink("todolist"),
             ),
@@ -213,16 +213,16 @@ case class SetChildren(children : List[TreeNode]) extends TreeEvent
 case object MoveUp extends TreeEvent
 case object MoveDown extends TreeEvent
 case object Delete extends TreeEvent
-                """),
+                """, true),
                 E.div(SpacerCss),
                 Text("Then we'll need a root component, to hold the state of the tree:"),
-                Component(CodeLoaderComponent, "treeeditor/TreeRootComponent.scala", None),
+                Component(CodeLoaderComponent, "treeeditor/TreeRootComponent.scala", None, true),
                 E.div(SpacerCss),
                 Text("Then a component to model each node in the tree:"),
-                Component(CodeLoaderComponent, "treeeditor/TreeNodeComponent.scala", None),
+                Component(CodeLoaderComponent, "treeeditor/TreeNodeComponent.scala", None, true),
                 E.div(SpacerCss),
                 Text("Finally, a helper function to update a list of children based on one of the events:"),
-                Component(CodeLoaderComponent, "treeeditor/TreeEvent.scala", Some("object TreeEvent")),
+                Component(CodeLoaderComponent, "treeeditor/TreeEvent.scala", Some("object TreeEvent"), true),
                 E.div(SpacerCss),
                 sourceLink("treeeditor"),
             ),
@@ -263,12 +263,12 @@ case object Delete extends TreeEvent
             E.div(
                 CodeColumnCss,
                 Text("This example shows a simple CSS class with a :hover effect. All links on this site uses it."),
-                Component(CodeLoaderComponent, "theme/LinkCss.scala", None),
+                Component(CodeLoaderComponent, "theme/LinkCss.scala", None, true),
                 E.div(SpacerCss),
                 Text("The class is attached to an element just like a style, attribute or child node:"),
                 Component(CodeComponent, """
 E.a(LinkCss, A.href("http://www.react4s.org/"), Text("react4s.org"))
-                """),
+                """, false),
                 E.div(SpacerCss),
                 sourceLink("theme/LinkCss.scala"),
             ),
@@ -287,7 +287,7 @@ E.a(LinkCss, A.href("http://www.react4s.org/"), Text("react4s.org"))
             E.div(
                 CodeColumnCss,
                 Text("This example shows how to use web sockets."),
-                Component(CodeLoaderComponent, "websockets/WebSocketsComponent.scala", None),
+                Component(CodeLoaderComponent, "websockets/WebSocketsComponent.scala", None, true),
                 E.div(SpacerCss),
                 sourceLink("websockets"),
             ),
@@ -313,7 +313,7 @@ FancyButton(
     J("tip", "Click me"),
     Text("Submit")
 )
-"""),
+""", true),
                 E.div(SpacerCss),
                 Text("In plain React, the above would look like this:"),
                 Component(CodeComponent, """
@@ -323,7 +323,7 @@ FancyButton(
     tip="Click me">
     Submit
 </FancyButton>
-"""),
+""", false),
                 E.div(SpacerCss),
             ),
             E.div(
