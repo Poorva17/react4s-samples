@@ -34,9 +34,9 @@ case class CodeComponent(code : P[String], highlight : P[Boolean]) extends Compo
 
     override def render(get : Get) : Element = {
         E.pre(CodeCss, E.span(
-            DefaultCodeCss,
+            /*DefaultCodeCss,
             if(get(highlight)) Tags(find(get(code).trim))
-            else Text(get(code).trim)
+            else*/ Text(get(code).trim)
         ))
     }
 }
