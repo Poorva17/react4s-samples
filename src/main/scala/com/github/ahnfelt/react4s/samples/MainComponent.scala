@@ -2,15 +2,13 @@ package com.github.ahnfelt.react4s.samples
 
 import com.github.ahnfelt.react4s._
 import com.github.ahnfelt.react4s.samples.theme._
-import org.scalajs.dom.ext.Ajax
-
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-import scala.scalajs.js
+import org.scalajs.dom
 
 case class MainComponent() extends Component[NoEmit] {
+    
+    val router = Routes.router
 
-    val page = State[Page](TodoListPage)
+    val page = State(router.data(dom.window.location.pathname))
 
     override def render(get : Get) : Element = {
         E.div(
@@ -25,22 +23,22 @@ case class MainComponent() extends Component[NoEmit] {
                     MenuColumnCss,
                     E.div(
                         E.div(Text("Usage"), MenuCategoryCss),
-                        E.div(Text("Overview"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(OverviewPage))),
-                        E.div(Text("Minimal project"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(MinimalProjectPage))),
-                        E.div(Text("Gotchas"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(GotchasPage))),
+                        E.div(MenuEntryCss, E.a(Text("Overview"), LinkCss, A.href(router.path(HomePage)))),
+                        E.div(MenuEntryCss, E.a(Text("Minimal project"), LinkCss, A.href(router.path(MinimalProjectPage())))),
+                        E.div(MenuEntryCss, E.a(Text("Gotchas"), LinkCss, A.href(router.path(GotchasPage())))),
                     ),
                     E.div(
                         E.div(Text("Examples"), MenuCategoryCss),
-                        E.div(Text("Todo list"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(TodoListPage))),
-                        E.div(Text("Css class"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(CssClassPage))),
-                        E.div(Text("Spotify search"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(SpotifyPage))),
-                        E.div(Text("Tree editor"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(TreeEditorPage))),
-                        E.div(Text("Timer"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(TimerPage))),
-                        E.div(Text("WebSockets"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(WebSocketsPage))),
-                        E.div(Text("React.js interop"), MenuEntryCss, LinkCss, A.onLeftClick(_ => page.set(ReactJsPage))),
+                        E.div(MenuEntryCss, E.a(Text("Todo list"), LinkCss, A.href(router.path(TodoListPage())))),
+                        E.div(MenuEntryCss, E.a(Text("Css class"), LinkCss, A.href(router.path(CssClassPage())))),
+                        E.div(MenuEntryCss, E.a(Text("Spotify search"), LinkCss, A.href(router.path(SpotifyPage())))),
+                        E.div(MenuEntryCss, E.a(Text("Tree editor"), LinkCss, A.href(router.path(TreeEditorPage())))),
+                        E.div(MenuEntryCss, E.a(Text("Timer"), LinkCss, A.href(router.path(TimerPage())))),
+                        E.div(MenuEntryCss, E.a(Text("WebSockets"), LinkCss, A.href(router.path(WebSocketsPage())))),
+                        E.div(MenuEntryCss, E.a(Text("React.js interop"), LinkCss, A.href(router.path(ReactJsPage())))),
                     ),
                 ),
-                Component(PageComponent, get(page))
+                get(page).map(Component(PageComponent, _)).getOrElse(E.div(ContentColumnCss, Text("Not found")))
             ),
             E.a(
                 S.fontFamily("Verdana"),

@@ -12,16 +12,17 @@ case class PageComponent(page : P[Page]) extends Component[NoEmit] {
 
     override def render(get : Get) : Element = {
         get(page) match {
-            case OverviewPage => renderMainPage()
-            case MinimalProjectPage => renderMinimalProjectPage()
-            case GotchasPage => renderGotchasPage()
-            case TodoListPage => renderTodoListPage()
-            case TreeEditorPage => renderTreeEditorPage()
-            case CssClassPage => renderCssClassPage()
-            case SpotifyPage => renderSpotifyPage()
-            case TimerPage => renderTimerPage()
-            case WebSocketsPage => renderWebSocketsPage()
-            case ReactJsPage => renderReactJsPage()
+            case HomePage => renderMainPage()
+            case MinimalProjectPage(_) => renderMinimalProjectPage()
+            case GotchasPage(_) => renderGotchasPage()
+            case ExamplesPage(_) => renderMainPage()
+            case TodoListPage(_) => renderTodoListPage()
+            case TreeEditorPage(_) => renderTreeEditorPage()
+            case CssClassPage(_) => renderCssClassPage()
+            case SpotifyPage(_) => renderSpotifyPage()
+            case TimerPage(_) => renderTimerPage()
+            case WebSocketsPage(_) => renderWebSocketsPage()
+            case ReactJsPage(_) => renderReactJsPage()
         }
     }
 
@@ -267,7 +268,7 @@ case object Delete extends TreeEvent
                 E.div(SpacerCss),
                 Text("The class is attached to an element just like a style, attribute or child node:"),
                 Component(CodeComponent, """
-E.a(LinkCss, A.href("http://www.react4s.org/"), Text("react4s.org"))
+E.a(LinkCss, A.href("/"), Text("react4s.org"))
                 """, false),
                 E.div(SpacerCss),
                 sourceLink("theme/LinkCss.scala"),
@@ -275,7 +276,7 @@ E.a(LinkCss, A.href("http://www.react4s.org/"), Text("react4s.org"))
             E.div(
                 ResultColumnCss,
                 E.h3(
-                    E.a(A.href("http://www.react4s.org/"), LinkCss, Text("react4s.org"))
+                    E.a(A.href("/"), LinkCss, Text("react4s.org"))
                 )
             )
         )

@@ -1,13 +1,14 @@
 package com.github.ahnfelt.react4s.samples
 
-sealed abstract class Page
-case object OverviewPage extends Page
-case object MinimalProjectPage extends Page
-case object GotchasPage extends Page
-case object TodoListPage extends Page
-case object TreeEditorPage extends Page
-case object CssClassPage extends Page
-case object SpotifyPage extends Page
-case object TimerPage extends Page
-case object WebSocketsPage extends Page
-case object ReactJsPage extends Page
+sealed trait Page
+case object HomePage extends Page
+case class MinimalProjectPage(parent : HomePage.type = HomePage) extends Page
+case class GotchasPage(parent : HomePage.type = HomePage) extends Page
+case class ExamplesPage(parent : HomePage.type = HomePage) extends Page
+case class TodoListPage(parent : ExamplesPage = ExamplesPage()) extends Page
+case class TreeEditorPage(parent : ExamplesPage = ExamplesPage()) extends Page
+case class CssClassPage(parent : ExamplesPage = ExamplesPage()) extends Page
+case class SpotifyPage(parent : ExamplesPage = ExamplesPage()) extends Page
+case class TimerPage(parent : ExamplesPage = ExamplesPage()) extends Page
+case class WebSocketsPage(parent : ExamplesPage = ExamplesPage()) extends Page
+case class ReactJsPage(parent : ExamplesPage = ExamplesPage()) extends Page
