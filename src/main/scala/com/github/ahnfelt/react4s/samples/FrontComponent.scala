@@ -38,7 +38,7 @@ case class FrontComponent() extends Component[NoEmit] {
                 Text("When the view is balanced, the speedup is exponential: O(log(n)) instead of O(n). "),
             ),
             E.h1(HeadingCss,
-                Text("No callbacks - just emit()")
+                Text("No callback props - just emit()")
             ),
             E.p(
                 Text("React4s has an Elm/Redux-like emit() system that lets you write pure components with no internal state. "),
