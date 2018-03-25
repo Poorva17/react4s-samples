@@ -7,6 +7,7 @@ object Routes {
     val path = new Router[Page]
 
     val router = path(HomePage,
+        path("support", SupportPage),
         path("minimal-project", MinimalProjectPage),
         path("gotchas", GotchasPage),
         path("examples", ExamplesPage,

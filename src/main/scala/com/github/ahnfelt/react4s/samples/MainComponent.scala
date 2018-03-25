@@ -40,6 +40,7 @@ case class MainComponent() extends Component[NoEmit] {
                     E.div(
                         E.div(Text("Usage"), MenuCategoryCss),
                         E.div(MenuEntryCss, E.a(Text("Overview"), LinkCss, A.href(href(HomePage)))),
+                        E.div(MenuEntryCss, E.a(Text("Support"), LinkCss, A.href(href(SupportPage())))),
                         E.div(MenuEntryCss, E.a(Text("Minimal project"), LinkCss, A.href(href(MinimalProjectPage())))),
                         E.div(MenuEntryCss, E.a(Text("Gotchas"), LinkCss, A.href(href(GotchasPage())))),
                     ),

@@ -8,21 +8,18 @@ case class FrontComponent() extends Component[NoEmit] {
     override def render(get : Get) : Element = {
         E.div(
             E.h1(HeadingCss,
-                Text("Component based UI")
+                Text("React4s: Component based UI")
             ),
             E.p(
-                Text("Specify webapps in terms of components, which are self-contained, reusable units of UI. "),
-                Text("Components can be built from smaller ones via composition, and rendering is expressed as a pure function from data to virtual DOM. "),
-                Text("It's an approach that scales with your application. "),
+                Text("React4s is a component based library for writing webapps in Scala, with React.js on the inside. "),
+                Text("The components are self-contained and composable, and rendering is specified as a pure function. "),
             ),
             E.h1(HeadingCss,
                 Text("No macros, no implicits, no boilerplate")
             ),
             E.p(
-                Text("React4s is straightforward in the sense that it uses no macros and no implicits. "),
-            ),
-            E.p(
-                Text("Yet, you'll likely find the examples to be shorter than the equivalent examples in comparable libraries, for Scala or otherwise. "),
+                Text("For the sake of simplicity, React4s uses no macros and no implicits. "),
+                Text("It's still concise though - check out the examples and compare them to similar libraries, for Scala or otherwise. "),
             ),
             E.h1(HeadingCss,
                 Text("Performance by default")
@@ -89,7 +86,7 @@ case class FrontComponent() extends Component[NoEmit] {
                 Text("Getting started")
             ),
             E.p(
-                Text("Check out the examples on the left hand side. Then clone ahnfelt/react4s-samples on GitHub or follow the minimal project guide. "),
+                Text("Check out the examples and the minimal project section on the left hand side menu. "),
             ),
             E.div(SpacerCss),
             E.div(SpacerCss),

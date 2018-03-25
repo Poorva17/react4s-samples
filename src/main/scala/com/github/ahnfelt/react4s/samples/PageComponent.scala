@@ -15,6 +15,7 @@ case class PageComponent(page : P[Page]) extends Component[NoEmit] {
             case HomePage => renderMainPage()
             case MinimalProjectPage(_) => renderMinimalProjectPage()
             case GotchasPage(_) => renderGotchasPage()
+            case SupportPage(_) => renderSupportPage()
             case ExamplesPage(_) => renderMainPage()
             case TodoListPage(_) => renderTodoListPage()
             case TreeEditorPage(_) => renderTreeEditorPage()
@@ -132,6 +133,27 @@ case class MainComponent() extends Component[NoEmit] {
                 E.div(SpacerCss),
                 E.div(Text("Updating state in the constructor or during render()"), S.fontWeight.bold()),
                 Text("React will throw an exception if you update state during these. Note that it's perfectly OK to update state in event handlers that are attached during render(), eg. A.onSubmit(...), since this delays the state update until the specified event occurs."),
+                E.div(SpacerCss),
+            ),
+            E.div(
+                ResultColumnCss,
+            )
+        )
+    }
+
+    def renderSupportPage() = {
+        E.div(
+            ContentColumnCss,
+            E.div(
+                CodeColumnCss,
+                Text("Do you have questions about React4s? The quickest way to get an answer is here:"),
+                E.div(SpacerCss),
+                E.div(E.a(A.href("https://gitter.im/scala-js/scala-js"), LinkCss, Text("gitter.im/scala-js/scala-js"))),
+                E.div(SpacerCss),
+                Text("Tag @Ahnfelt in your question to get help from the author."),
+                E.div(SpacerCss),
+                E.div(SpacerCss),
+                E.div(Text("Alternatively, you can ask in "), E.a(A.href("https://www.reddit.com/r/scala/"), LinkCss, Text("/r/scala"))),
                 E.div(SpacerCss),
             ),
             E.div(
