@@ -5,10 +5,26 @@ import com.github.ahnfelt.react4s.samples.theme._
 import org.scalajs.dom
 
 case class MainComponent() extends Component[NoEmit] {
-    
-    val router = Routes.router
 
-    val page = State(router.data(dom.window.location.pathname))
+    def href(page : Page) =
+        if(dom.window.location.href.contains("?"))
+            "#" + Routes.router.path(page)
+        else
+            Routes.router.path(page)
+
+    def path() =
+        if(dom.window.location.href.contains("?"))
+            dom.window.location.hash.drop(1)
+        else
+            dom.window.location.pathname
+
+    val page = State(Routes.router.data(path()))
+
+    if(dom.window.location.href.contains("?")) {
+        dom.window.onhashchange = { _ =>
+            page.set(Routes.router.data(path()))
+        }
+    }
 
     override def render(get : Get) : Element = {
         E.div(
@@ -23,19 +39,19 @@ case class MainComponent() extends Component[NoEmit] {
                     MenuColumnCss,
                     E.div(
                         E.div(Text("Usage"), MenuCategoryCss),
-                        E.div(MenuEntryCss, E.a(Text("Overview"), LinkCss, A.href(router.path(HomePage)))),
-                        E.div(MenuEntryCss, E.a(Text("Minimal project"), LinkCss, A.href(router.path(MinimalProjectPage())))),
-                        E.div(MenuEntryCss, E.a(Text("Gotchas"), LinkCss, A.href(router.path(GotchasPage())))),
+                        E.div(MenuEntryCss, E.a(Text("Overview"), LinkCss, A.href(href(HomePage)))),
+                        E.div(MenuEntryCss, E.a(Text("Minimal project"), LinkCss, A.href(href(MinimalProjectPage())))),
+                        E.div(MenuEntryCss, E.a(Text("Gotchas"), LinkCss, A.href(href(GotchasPage())))),
                     ),
                     E.div(
                         E.div(Text("Examples"), MenuCategoryCss),
-                        E.div(MenuEntryCss, E.a(Text("Todo list"), LinkCss, A.href(router.path(TodoListPage())))),
-                        E.div(MenuEntryCss, E.a(Text("Css class"), LinkCss, A.href(router.path(CssClassPage())))),
-                        E.div(MenuEntryCss, E.a(Text("Spotify search"), LinkCss, A.href(router.path(SpotifyPage())))),
-                        E.div(MenuEntryCss, E.a(Text("Tree editor"), LinkCss, A.href(router.path(TreeEditorPage())))),
-                        E.div(MenuEntryCss, E.a(Text("Timer"), LinkCss, A.href(router.path(TimerPage())))),
-                        E.div(MenuEntryCss, E.a(Text("WebSockets"), LinkCss, A.href(router.path(WebSocketsPage())))),
-                        E.div(MenuEntryCss, E.a(Text("React.js interop"), LinkCss, A.href(router.path(ReactJsPage())))),
+                        E.div(MenuEntryCss, E.a(Text("Todo list"), LinkCss, A.href(href(TodoListPage())))),
+                        E.div(MenuEntryCss, E.a(Text("Css class"), LinkCss, A.href(href(CssClassPage())))),
+                        E.div(MenuEntryCss, E.a(Text("Spotify search"), LinkCss, A.href(href(SpotifyPage())))),
+                        E.div(MenuEntryCss, E.a(Text("Tree editor"), LinkCss, A.href(href(TreeEditorPage())))),
+                        E.div(MenuEntryCss, E.a(Text("Timer"), LinkCss, A.href(href(TimerPage())))),
+                        E.div(MenuEntryCss, E.a(Text("WebSockets"), LinkCss, A.href(href(WebSocketsPage())))),
+                        E.div(MenuEntryCss, E.a(Text("React.js interop"), LinkCss, A.href(href(ReactJsPage())))),
                     ),
                 ),
                 get(page).map(Component(PageComponent, _)).getOrElse(E.div(ContentColumnCss, Text("Not found")))

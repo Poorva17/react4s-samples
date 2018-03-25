@@ -32,10 +32,7 @@ case class PageComponent(page : P[Page]) extends Component[NoEmit] {
             ContentColumnCss,
             E.div(
                 CodeColumnCss,
-                Text("React4s is a Scala library for frontend UI. It wraps Facebook's React library. It exposes an API that makes it easy to write plain and simple Scala code for your components. You get the indispensable shouldComponentUpdate() for free, no callback memoization required. It uses no macros, no implicits and no complicated types."),
-                E.div(SpacerCss),
-                E.div(Text("You can get a quick introduction in the "), E.a(LinkCss, A.target("_blank"), A.href("https://github.com/Ahnfelt/react4s/blob/master/README.md"), Text("readme")), Text(".")),
-                E.div(SpacerCss),
+                Component(FrontComponent),
             ),
             E.div(
                 ResultColumnCss,
