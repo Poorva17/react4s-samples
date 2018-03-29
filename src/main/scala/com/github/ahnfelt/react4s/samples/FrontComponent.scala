@@ -37,14 +37,24 @@ case class FrontComponent() extends Component[NoEmit] {
                 Text("This means that only the relevant path from the root of the view to the updated branch is recomputed. "),
                 Text("When the view is balanced, the speedup is exponential: O(log(n)) instead of O(n). "),
             ),
+            E.img(
+                A.src("https://docs.google.com/drawings/d/e/2PACX-1vQSI9gpc-jRngqNwtsw6lUFgx-NmK4uycVeMXgiF5w_OPqH_gv9YUJ8GFQjl2zqN7TV8JJ9MyY72mlb/pub?w=915&h=424"),
+                S.maxWidth.px(600),
+                CodeCss,
+            ),
             E.h1(HeadingCss,
                 Text("No callback props - just emit()")
             ),
             E.p(
-                Text("React4s has an Elm/Redux-like emit() system that lets you write pure components with no internal state. "),
-                Text("Instead of updating state locally, you can choose to emit() a message to the parent component, telling it how to update. "),
+                Text("React4s has an Elm/Redux-like emit() system. That means that the props are always the input, and emit() is always the output - instead of props being both input and, via callbacks, output as in plain React.js. "),
+            ),
+            E.img(
+                A.src("https://docs.google.com/drawings/d/e/2PACX-1vTLVj6Y71iTEvr8FA2eqyPx3xIHgnoZwhebw3aJ5qBsvzKPrBQVW14dxiX2PP_RpB23vCkwNko_DxC2/pub?w=505&h=356"),
+                S.maxWidth.px(600),
+                CodeCss,
             ),
             E.p(
+                Text("Instead of updating state locally, you can choose to emit() a message to the parent component, telling it how to update its model. "),
                 Text("Using this, you have the option of making your entire view pure, and only have state at the very top of your view. "),
                 Text("Or you can mix and match. "),
             ),
@@ -62,7 +72,12 @@ case class FrontComponent() extends Component[NoEmit] {
             ),
             E.p(
                 Text("You can factor out code that deals with setting up and tearing down AJAX, timers, global event listeners and so on into Attachables, which can be declarative and reusable. "),
-                Text("One example is the included Loader, which declaratively loads data from any source that can provide a Future. "),
+                Text("One example is the included Loader, which declaratively loads data from any source that can provide a Future, and resolves race conditions. "),
+            ),
+            E.img(
+                A.src("https://docs.google.com/drawings/d/e/2PACX-1vQWwDd7SIzwgCgRyWASlPGSsfn9hgnG48SFUJcKSCCaCc_usFniMFvQT0M20fHZV9coPvK4NKISJug6/pub?w=984&amp;h=461"),
+                S.maxWidth.px(600),
+                CodeCss,
             ),
             E.h1(HeadingCss,
                 Text("CSS support with automatic namespacing")
