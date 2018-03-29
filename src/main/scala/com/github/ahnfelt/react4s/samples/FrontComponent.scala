@@ -54,7 +54,7 @@ case class FrontComponent() extends Component[NoEmit] {
                 CodeCss,
             ),
             E.p(
-                Text("Instead of updating state locally, you can choose to emit() a message to the parent component, telling it how to update its model. "),
+                Text("Instead of updating state locally, you can choose to emit() a message to the parent component, telling it how to update the model for the inner component. "),
                 Text("Using this, you have the option of making your entire view pure, and only have state at the very top of your view. "),
                 Text("Or you can mix and match. "),
             ),
