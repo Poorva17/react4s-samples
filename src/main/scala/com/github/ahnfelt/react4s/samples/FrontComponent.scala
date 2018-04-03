@@ -24,6 +24,7 @@ case class FrontComponent() extends Component[NoEmit] {
                 Component(UppercaseComponent)
             ),
             E.div(SpacerCss),
+            E.div(SpacerCss),
             E.p(
                 Text("See the sidebar for examples with AJAX, CSS, WebSockets and more. "),
             ),
