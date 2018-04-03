@@ -22,7 +22,20 @@ case class FrontComponent() extends Component[NoEmit] {
                 Text("Try me: "),
                 Component(UppercaseComponent)
             ),
-            Component(CodeLoaderComponent, "uppercase/UppercaseComponent.scala", None, true),
+            Component(CodeComponent, """
+case class UppercaseComponent() extends Component[NoEmit] {
+
+    val text = State("Hello!")
+
+    override def render(get : Get) = {
+        E.span(
+            E.input(A.value(get(text)), A.onChangeText(text.set)),
+            Text(" = " + get(text).toUpperCase)
+        )
+    }
+
+}
+            """, true),
             E.div(SpacerCss),
             E.h1(HeadingCss,
                 Text("No macros, no implicits, no boilerplate")
