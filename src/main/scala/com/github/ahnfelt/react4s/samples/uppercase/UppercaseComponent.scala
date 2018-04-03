@@ -4,12 +4,12 @@ import com.github.ahnfelt.react4s._
 
 case class UppercaseComponent() extends Component[NoEmit] {
 
-    val text = State("")
+    val text = State("Hello!")
 
     override def render(get : Get) = {
-        E.div(
+        E.span(
             E.input(A.value(get(text)), A.onChangeText(text.set)),
-            E.div(Text(get(text).toUpperCase))
+            Text(" .toUpperCase = " + get(text).toUpperCase)
         )
     }
 

@@ -16,7 +16,14 @@ case class FrontComponent() extends Component[NoEmit] {
                 Text("The components are self-contained and composable, and rendering is specified as a pure function. "),
             ),
             Component(CodeLoaderComponent, "uppercase/UppercaseComponent.scala", None, true),
-            Component(UppercaseComponent),
+            E.p(
+                S.fontWeight.bold(),
+                Text("Try me: "),
+                Component(UppercaseComponent)
+            ),
+            E.p(
+                Text("See the sidebar for examples with AJAX, CSS, WebSockets and more. "),
+            ),
             E.h1(HeadingCss,
                 Text("No macros, no implicits, no boilerplate")
             ),
