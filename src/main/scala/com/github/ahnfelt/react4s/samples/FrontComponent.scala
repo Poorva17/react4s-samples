@@ -59,7 +59,7 @@ case class FrontComponent() extends Component[NoEmit] {
                 Text("React4s has an Elm/Redux-like emit() system. That means that the props are always the input, and emit() is always the output - instead of props being both input and, via callbacks, output as in plain React.js. "),
             ),
             E.img(
-                A.src("https://docs.google.com/drawings/d/e/2PACX-1vTLVj6Y71iTEvr8FA2eqyPx3xIHgnoZwhebw3aJ5qBsvzKPrBQVW14dxiX2PP_RpB23vCkwNko_DxC2/pub?w=505&h=356"),
+                A.src("https://docs.google.com/drawings/d/e/2PACX-1vTLVj6Y71iTEvr8FA2eqyPx3xIHgnoZwhebw3aJ5qBsvzKPrBQVW14dxiX2PP_RpB23vCkwNko_DxC2/pub?w=1000"),
                 S.maxWidth.px(600),
                 CodeCss,
             ),
