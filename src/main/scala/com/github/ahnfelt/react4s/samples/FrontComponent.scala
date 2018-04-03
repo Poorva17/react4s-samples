@@ -2,6 +2,7 @@ package com.github.ahnfelt.react4s.samples
 
 import com.github.ahnfelt.react4s._
 import com.github.ahnfelt.react4s.samples.theme._
+import com.github.ahnfelt.react4s.samples.uppercase.UppercaseComponent
 
 case class FrontComponent() extends Component[NoEmit] {
 
@@ -14,6 +15,8 @@ case class FrontComponent() extends Component[NoEmit] {
                 Text("React4s is a component based library for writing webapps in Scala, with React.js on the inside. "),
                 Text("The components are self-contained and composable, and rendering is specified as a pure function. "),
             ),
+            Component(CodeLoaderComponent, "uppercase/UppercaseComponent.scala", None, true),
+            Component(UppercaseComponent),
             E.h1(HeadingCss,
                 Text("No macros, no implicits, no boilerplate")
             ),
