@@ -77,7 +77,8 @@ case class FrontComponent() extends Component[NoEmit] {
                 Text("Finally componentWillUnmount() is called just before the component is removed from the DOM. "),
             ),
             E.img(
-                A.src("https://cloud.githubusercontent.com/assets/78472/22898855/198ae112-f229-11e6-8784-b854dd679f50.png"),
+                A.src("https://docs.google.com/drawings/d/e/2PACX-1vR3Ws7vf5_8OUwKHm0H3It1rWi7J1UBFveyfa0M-roVSk9s6fBTuIscfKZpNDczI4iMZXTZtEWvj3Ol/pub?w=1028&h=898"),
+                S.maxWidth.px(600),
                 CodeCss,
             ),
             E.p(
