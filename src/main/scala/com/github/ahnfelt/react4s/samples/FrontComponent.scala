@@ -24,10 +24,10 @@ case class FrontComponent() extends Component[NoEmit] {
                 Component(UppercaseComponent)
             ),
             E.div(SpacerCss),
-            E.div(SpacerCss),
             E.p(
                 Text("See the sidebar for examples with AJAX, CSS, WebSockets and more. "),
             ),
+            E.div(SpacerCss),
             E.h1(HeadingCss,
                 Text("No macros, no implicits, no boilerplate")
             ),
