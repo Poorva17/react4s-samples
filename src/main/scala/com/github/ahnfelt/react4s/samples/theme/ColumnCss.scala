@@ -100,7 +100,7 @@ object MenuEntryCss extends CssClass(
 
 object CodeCss extends CssClass(
     S.backgroundColor(Palette.background),
-    S.color(Palette.accent),
+    S.color(Palette.text),
     S.boxShadow("0 1px 2px rgba(0, 0, 0, 0.3)"),
     S.margin.px(10),
     S.padding.px(10),
