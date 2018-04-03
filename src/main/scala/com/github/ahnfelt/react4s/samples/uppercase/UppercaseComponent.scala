@@ -9,7 +9,7 @@ case class UppercaseComponent() extends Component[NoEmit] {
     override def render(get : Get) = {
         E.span(
             E.input(A.value(get(text)), A.onChangeText(text.set)),
-            Text(" .toUpperCase = " + get(text).toUpperCase)
+            Text(" = " + get(text).toUpperCase)
         )
     }
 
