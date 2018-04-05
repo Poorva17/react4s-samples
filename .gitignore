@@ -1,0 +1,72 @@
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+*.sass-cache
+*.iml
+
+# OS or Editor folders
+.DS_Store
+.cache
+.project
+.settings
+.tmproj
+nbproject
+Thumbs.db
+.idea/
+.idea/vcs.xml
+.idea/*.xml
+.idea/hydra.xml
+
+# NPM packages folder.
+**/node_modules/
+
+# Brunch output folder.
+public/
+
+
+ignore
+.vagrant
+logs
+project/project/target
+project/target
+target
+tmp
+.history
+dist
+.idea
+.vscode
+*.iml
+/out
+.idea_modules
+.classpath
+.project
+/RUNNING_PID
+.settings
+.DS_Store
+integration/project/build.properties
+
+# hidden cross project folders
+shared/.js
+shared/.jvm
+
+# temp files
+.~*
+*~
+*.orig
+
+# eclipse
+.scala_dependencies
+.buildpath
+.target
+.idea
+bin/
+journal
+snapshots
+
