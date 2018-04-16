@@ -1,6 +1,7 @@
 package com.github.ahnfelt.react4s.samples
 
 import com.github.ahnfelt.react4s._
+import com.github.ahnfelt.react4s.samples.portal.PortalComponent
 import com.github.ahnfelt.react4s.samples.spotify.SpotifyComponent
 import com.github.ahnfelt.react4s.samples.theme._
 import com.github.ahnfelt.react4s.samples.timer.TimerComponent
@@ -22,6 +23,7 @@ case class PageComponent(page : P[Page]) extends Component[NoEmit] {
             case CssClassPage(_) => renderCssClassPage()
             case SpotifyPage(_) => renderSpotifyPage()
             case TimerPage(_) => renderTimerPage()
+            case PortalPage(_) => renderPortalPage()
             case WebSocketsPage(_) => renderWebSocketsPage()
             case ReactJsPage(_) => renderReactJsPage()
         }
@@ -61,7 +63,7 @@ scalaJSUseMainModuleInitializer := true
 scalaVersion := "2.12.4"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
-libraryDependencies += "com.github.ahnfelt" %%% "react4s" % "0.9.4-SNAPSHOT"
+libraryDependencies += "com.github.ahnfelt" %%% "react4s" % "0.9.6-SNAPSHOT"
                 """, false),
                 E.div(SpacerCss),
                 Text("index.html"),
@@ -192,6 +194,23 @@ case class MainComponent() extends Component[NoEmit] {
             E.div(
                 ResultColumnCss,
                 Component(TimerComponent)
+            )
+        )
+    }
+
+    def renderPortalPage() = {
+        E.div(
+            ContentColumnCss,
+            E.div(
+                CodeColumnCss,
+                Text("This example shows how to use React Portals."),
+                Component(CodeLoaderComponent, "portal/PortalComponent.scala", None, true),
+                E.div(SpacerCss),
+                sourceLink("portal"),
+            ),
+            E.div(
+                ResultColumnCss,
+                Component(PortalComponent)
             )
         )
     }
