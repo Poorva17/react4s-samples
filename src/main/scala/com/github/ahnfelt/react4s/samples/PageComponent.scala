@@ -203,7 +203,7 @@ case class MainComponent() extends Component[NoEmit] {
             ContentColumnCss,
             E.div(
                 CodeColumnCss,
-                Text("This example shows how to use React Portals."),
+                Text("This example shows how to use React Portals to show a dialog outside the current component."),
                 Component(CodeLoaderComponent, "portal/PortalComponent.scala", None, true),
                 E.div(SpacerCss),
                 sourceLink("portal"),
