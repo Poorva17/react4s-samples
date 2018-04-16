@@ -41,7 +41,7 @@ case class PortalComponent() extends Component[NoEmit] {
         S.left.px(30),
         S.right.px(30),
         CodeCss,
-        Text("This is a dialog\n\nClick to close"),
+        Text("\n\n     This is a dialog\n\n    Click to close"),
         A.onLeftClick(_ => showDialog.set(false))
     )
 
