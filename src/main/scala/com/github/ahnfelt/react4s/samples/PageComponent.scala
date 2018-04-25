@@ -237,7 +237,8 @@ case class MainComponent() extends Component[NoEmit] {
             ContentColumnCss,
             E.div(
                 CodeColumnCss,
-                Text("This example shows how to emit messages from components and handle them."),
+                Text("This example shows how to code in a purely functional style, "),
+                Text("where state only lives in the root component. "),
                 E.div(SpacerCss),
                 Text("First we'll need a data structure for the tree nodes and for tree node messages:"),
                 Component(CodeComponent, """
