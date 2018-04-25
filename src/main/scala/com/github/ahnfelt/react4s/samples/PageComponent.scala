@@ -240,7 +240,7 @@ case class MainComponent() extends Component[NoEmit] {
                 Text("This tree editor example shows how to code in a purely functional style, "),
                 Text("where state only lives in the root component. "),
                 E.div(SpacerCss),
-                Text("First define a data structure for the tree nodes and for edit messages:"),
+                Text("First define a data structure for the tree nodes and for edit events:"),
                 Component(CodeComponent, """
 case class TreeNode(
     label : String,
@@ -258,7 +258,7 @@ case object Delete extends TreeEvent
                 Text("Then introduce root component, to hold the only state of the application:"),
                 Component(CodeLoaderComponent, "treeeditor/TreeRootComponent.scala", None, true),
                 E.div(SpacerCss),
-                Text("Then a component to model each individual node in the tree recursively:"),
+                Text("Then a component to model each individual node in the tree:"),
                 Component(CodeLoaderComponent, "treeeditor/TreeNodeComponent.scala", None, true),
                 E.div(SpacerCss),
                 Text("Finally, a helper function to update a list of children based on one of the events:"),
