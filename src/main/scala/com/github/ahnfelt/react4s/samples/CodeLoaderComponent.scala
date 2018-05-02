@@ -39,9 +39,9 @@ case class CodeLoaderComponent(path : P[String], symbol : P[Option[String]], hig
                 Text(if(get(showImports)) "Hide imports" else "Show imports"),
                 A.onLeftClick(_ => showImports.modify(!_))
             ),
-            if(get(loader.loading)) E.pre(CodeCss, Text("Loading..."))
-            else if(get(loader.error).nonEmpty) E.pre(CodeCss, Text("Error loading:\n" + url(get)))
-            else Component(CodeComponent, get(loader).map(filterCode(get, _)).getOrElse(""), get(highlight))
+            if(get(loader).loading) E.pre(CodeCss, Text("Loading..."))
+            else if(get(loader).error.nonEmpty) E.pre(CodeCss, Text("Error loading:\n" + url(get)))
+            else Component(CodeComponent, get(loader).value.map(filterCode(get, _)).getOrElse(""), get(highlight))
         )
     }
 }

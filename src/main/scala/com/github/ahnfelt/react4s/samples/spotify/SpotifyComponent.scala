@@ -27,10 +27,10 @@ case class SpotifyComponent() extends Component[NoEmit] {
         E.div(
             E.h3(Text("Search in Spotify artists")),
             E.input(A.value(get(query)), A.onChangeText(query.set)),
-            Text(" loading ... ").when(get(artists.loading)),
-            Text(" error! ").when(get(artists.error).nonEmpty),
+            Text(" loading ... ").when(get(artists).loading),
+            Text(" error! ").when(get(artists).error.nonEmpty),
             E.div(S.paddingTop.px(10), Tags(
-                for(artist <- get(artists).toList.flatten)
+                for(artist <- get(artists).value.toList.flatten)
                     yield renderArtist(artist)
             ))
         )
