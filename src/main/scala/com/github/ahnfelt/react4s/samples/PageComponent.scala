@@ -1,16 +1,12 @@
 package com.github.ahnfelt.react4s.samples
 
 import com.github.ahnfelt.react4s._
-import com.github.ahnfelt.react4s.samples.CommentList.CommentListComponent
+import com.github.ahnfelt.react4s.samples.CommentListExample.connector.Connector
 import com.github.ahnfelt.react4s.samples.spotify.SpotifyComponent
 import com.github.ahnfelt.react4s.samples.theme._
 import com.github.ahnfelt.react4s.samples.timer.TimerComponent
 import com.github.ahnfelt.react4s.samples.todolist.TodoListComponent
-import com.github.ahnfelt.react4s.samples.treeeditor.{
-  TreeNode,
-  TreeNodeComponent,
-  TreeRootComponent
-}
+import com.github.ahnfelt.react4s.samples.treeeditor.{TreeNode, TreeRootComponent}
 import com.github.ahnfelt.react4s.samples.websockets.WebSocketsComponent
 
 case class PageComponent(page: P[Page]) extends Component[NoEmit] {
@@ -52,18 +48,15 @@ case class PageComponent(page: P[Page]) extends Component[NoEmit] {
       E.div(
         CodeColumnCss,
         Text(
-          "React4s projects typically start with 5 files like the ones below, 4 of which you need for any Scala.js application. If you'd rather begin from an existing project, you can simple clone the "),
-        E.a(LinkCss,
-            A.href("https://github.com/ahnfelt/react4s-samples"),
-            Text("react4s.org source code")),
+          "React4s projects typically start with 5 files like the ones below, 4 of which you need for any Scala.js application. If you'd rather begin from an existing project, you can simple clone the "
+        ),
+        E.a(LinkCss, A.href("https://github.com/ahnfelt/react4s-samples"), Text("react4s.org source code")),
         Text("."),
         E.div(SpacerCss),
         Text("project/plugins.sbt"),
-        Component(CodeComponent,
-                  """
+        Component(CodeComponent, """
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.22")
-                """,
-                  false),
+                """, false),
         E.div(SpacerCss),
         Text("build.sbt"),
         Component(
@@ -148,24 +141,28 @@ case class MainComponent() extends Component[NoEmit] {
       E.div(
         CodeColumnCss,
         Text(
-          "All libraries have gotchas, but they're not always documented. While they may be seen to reflect poorly on the library, maybe it's much worse if they're hidden away for the programmer to discover after the fact. With that in mind, here is the complete list of known gotchas for React4s:"),
+          "All libraries have gotchas, but they're not always documented. While they may be seen to reflect poorly on the library, maybe it's much worse if they're hidden away for the programmer to discover after the fact. With that in mind, here is the complete list of known gotchas for React4s:"
+        ),
         E.div(SpacerCss),
         E.div(Text("Functions as props"), S.fontWeight.bold()),
         Text(
-          "React4s relies on == to implement shouldComponentUpdate. Since == will only check reference equality for functions, the component will update more often than necessary if passing in functions as arguments, unless you jump through hoops to avoid reallocating functions. All this trouble can be avoided simply by using emit() instead of callbacks."),
+          "React4s relies on == to implement shouldComponentUpdate. Since == will only check reference equality for functions, the component will update more often than necessary if passing in functions as arguments, unless you jump through hoops to avoid reallocating functions. All this trouble can be avoided simply by using emit() instead of callbacks."
+        ),
         E.div(SpacerCss),
         E.div(Text("Mutable props"), S.fontWeight.bold()),
         Text(
-          "React4s relies on == to implement shouldComponentUpdate. For mutable objects, even if == returns true, a rerendering may be necessary, since the object might have been updated regardless. This will result in a stale view. Please use only immutable values as props."),
+          "React4s relies on == to implement shouldComponentUpdate. For mutable objects, even if == returns true, a rerendering may be necessary, since the object might have been updated regardless. This will result in a stale view. Please use only immutable values as props."
+        ),
         E.div(SpacerCss),
         E.div(Text("Tag props"), S.fontWeight.bold()),
         Text(
-          "React4s relies on == to implement shouldComponentUpdate. Since tags can contain callbacks, and functions can't be compared for equality, you shouldn't use tags (elements, components, etc.) as props. Instead, create an abstract component with the functionality you need and extend it."),
+          "React4s relies on == to implement shouldComponentUpdate. Since tags can contain callbacks, and functions can't be compared for equality, you shouldn't use tags (elements, components, etc.) as props. Instead, create an abstract component with the functionality you need and extend it."
+        ),
         E.div(SpacerCss),
-        E.div(Text("Updating state in the constructor or during render()"),
-              S.fontWeight.bold()),
+        E.div(Text("Updating state in the constructor or during render()"), S.fontWeight.bold()),
         Text(
-          "React will throw an exception if you update state during these. Note that it's perfectly OK to update state in event handlers that are attached during render(), eg. A.onSubmit(...), since this delays the state update until the specified event occurs."),
+          "React will throw an exception if you update state during these. Note that it's perfectly OK to update state in event handlers that are attached during render(), eg. A.onSubmit(...), since this delays the state update until the specified event occurs."
+        ),
         E.div(SpacerCss),
       ),
       E.div(
@@ -179,21 +176,14 @@ case class MainComponent() extends Component[NoEmit] {
       ContentColumnCss,
       E.div(
         CodeColumnCss,
-        Text(
-          "Do you have questions about React4s? The quickest way to get an answer is here:"),
+        Text("Do you have questions about React4s? The quickest way to get an answer is here:"),
         E.div(SpacerCss),
-        E.div(
-          E.a(A.href("https://gitter.im/scala-js/scala-js"),
-              LinkCss,
-              Text("gitter.im/scala-js/scala-js"))),
+        E.div(E.a(A.href("https://gitter.im/scala-js/scala-js"), LinkCss, Text("gitter.im/scala-js/scala-js"))),
         E.div(SpacerCss),
         Text("Tag @Ahnfelt in your question to get help from the author."),
         E.div(SpacerCss),
         E.div(SpacerCss),
-        E.div(Text("Alternatively, you can ask in "),
-              E.a(A.href("https://www.reddit.com/r/scala/"),
-                  LinkCss,
-                  Text("/r/scala"))),
+        E.div(Text("Alternatively, you can ask in "), E.a(A.href("https://www.reddit.com/r/scala/"), LinkCss, Text("/r/scala"))),
         E.div(SpacerCss),
       ),
       E.div(
@@ -208,10 +198,7 @@ case class MainComponent() extends Component[NoEmit] {
       E.div(
         CodeColumnCss,
         Text("This example shows how to use debouncing and AJAX."),
-        Component(CodeLoaderComponent,
-                  "spotify/SpotifyComponent.scala",
-                  None,
-                  true),
+        Component(CodeLoaderComponent, "spotify/SpotifyComponent.scala", None, true),
         E.div(SpacerCss),
         sourceLink("spotify"),
       ),
@@ -228,10 +215,7 @@ case class MainComponent() extends Component[NoEmit] {
       E.div(
         CodeColumnCss,
         Text("This example shows how many seconds elapsed so far."),
-        Component(CodeLoaderComponent,
-                  "timer/TimerComponent.scala",
-                  None,
-                  true),
+        Component(CodeLoaderComponent, "timer/TimerComponent.scala", None, true),
         E.div(SpacerCss),
         sourceLink("timer"),
       ),
@@ -248,10 +232,7 @@ case class MainComponent() extends Component[NoEmit] {
       E.div(
         CodeColumnCss,
         Text("This example shows a simple TODO list."),
-        Component(CodeLoaderComponent,
-                  "todolist/TodoListComponent.scala",
-                  None,
-                  true),
+        Component(CodeLoaderComponent, "todolist/TodoListComponent.scala", None, true),
         E.div(SpacerCss),
         sourceLink("todolist"),
       ),
@@ -268,16 +249,13 @@ case class MainComponent() extends Component[NoEmit] {
       E.div(
         CodeColumnCss,
         Text("This example shows a simple Comment list."),
-        Component(CodeLoaderComponent,
-                  "CommentList/CommentListComponent.scala",
-                  None,
-                  true),
+        Component(CodeLoaderComponent, "CommentListExampl/Connector.scala", None, true),
         E.div(SpacerCss),
         sourceLink("CommentList"),
       ),
       E.div(
         ResultColumnCss,
-        Component(CommentListComponent)
+        Component(Connector)
       )
     )
   }
@@ -287,11 +265,9 @@ case class MainComponent() extends Component[NoEmit] {
       ContentColumnCss,
       E.div(
         CodeColumnCss,
-        Text(
-          "This example shows how to emit messages from components and handle them."),
+        Text("This example shows how to emit messages from components and handle them."),
         E.div(SpacerCss),
-        Text(
-          "First we'll need a data structure for the tree nodes and for tree node messages:"),
+        Text("First we'll need a data structure for the tree nodes and for tree node messages:"),
         Component(
           CodeComponent,
           """
@@ -310,25 +286,14 @@ case object Delete extends TreeEvent
           true
         ),
         E.div(SpacerCss),
-        Text(
-          "Then we'll need a root component, to hold the state of the tree:"),
-        Component(CodeLoaderComponent,
-                  "treeeditor/TreeRootComponent.scala",
-                  None,
-                  true),
+        Text("Then we'll need a root component, to hold the state of the tree:"),
+        Component(CodeLoaderComponent, "treeeditor/TreeRootComponent.scala", None, true),
         E.div(SpacerCss),
         Text("Then a component to model each node in the tree:"),
-        Component(CodeLoaderComponent,
-                  "treeeditor/TreeNodeComponent.scala",
-                  None,
-                  true),
+        Component(CodeLoaderComponent, "treeeditor/TreeNodeComponent.scala", None, true),
         E.div(SpacerCss),
-        Text(
-          "Finally, a helper function to update a list of children based on one of the events:"),
-        Component(CodeLoaderComponent,
-                  "treeeditor/TreeEvent.scala",
-                  Some("object TreeEvent"),
-                  true),
+        Text("Finally, a helper function to update a list of children based on one of the events:"),
+        Component(CodeLoaderComponent, "treeeditor/TreeEvent.scala", Some("object TreeEvent"), true),
         E.div(SpacerCss),
         sourceLink("treeeditor"),
       ),
@@ -381,17 +346,13 @@ case object Delete extends TreeEvent
       ContentColumnCss,
       E.div(
         CodeColumnCss,
-        Text(
-          "This example shows a simple CSS class with a :hover effect. All links on this site uses it."),
+        Text("This example shows a simple CSS class with a :hover effect. All links on this site uses it."),
         Component(CodeLoaderComponent, "theme/LinkCss.scala", None, true),
         E.div(SpacerCss),
-        Text(
-          "The class is attached to an element just like a style, attribute or child node:"),
-        Component(CodeComponent,
-                  """
+        Text("The class is attached to an element just like a style, attribute or child node:"),
+        Component(CodeComponent, """
 E.a(LinkCss, A.href("/"), Text("react4s.org"))
-                """,
-                  false),
+                """, false),
         E.div(SpacerCss),
         sourceLink("theme/LinkCss.scala"),
       ),
@@ -410,10 +371,7 @@ E.a(LinkCss, A.href("/"), Text("react4s.org"))
       E.div(
         CodeColumnCss,
         Text("This example shows how to use web sockets."),
-        Component(CodeLoaderComponent,
-                  "websockets/WebSocketsComponent.scala",
-                  None,
-                  true),
+        Component(CodeLoaderComponent, "websockets/WebSocketsComponent.scala", None, true),
         E.div(SpacerCss),
         sourceLink("websockets"),
       ),
@@ -429,8 +387,7 @@ E.a(LinkCss, A.href("/"), Text("react4s.org"))
       ContentColumnCss,
       E.div(
         CodeColumnCss,
-        Text(
-          "This example shows how to use a component that was defined in plain JavaScript+React."),
+        Text("This example shows how to use a component that was defined in plain JavaScript+React."),
         Component(
           CodeComponent,
           """
@@ -473,10 +430,7 @@ FancyButton(
       "https://github.com/Ahnfelt/react4s-samples/blob/master/src/main/scala/com/github/ahnfelt/react4s/samples/"
     val url = prefix + suffix
     E.div(
-      E.a(A.target("_blank"),
-          A.href(url),
-          LinkCss,
-          Text("Full source code: " + suffix)),
+      E.a(A.target("_blank"), A.href(url), LinkCss, Text("Full source code: " + suffix)),
       E.div(SpacerCss),
     )
   }
