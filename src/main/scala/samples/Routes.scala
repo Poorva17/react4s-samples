@@ -1,4 +1,4 @@
-package com.github.ahnfelt.react4s.samples
+package samples
 
 import com.github.werk.router4s.Router
 

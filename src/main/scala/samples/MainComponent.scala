@@ -1,7 +1,7 @@
-package com.github.ahnfelt.react4s.samples
+package samples
 
 import com.github.ahnfelt.react4s._
-import com.github.ahnfelt.react4s.samples.theme._
+import samples.theme._
 import org.scalajs.dom
 
 case class MainComponent() extends Component[NoEmit] {

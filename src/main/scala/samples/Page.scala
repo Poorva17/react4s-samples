@@ -1,4 +1,4 @@
-package com.github.ahnfelt.react4s.samples
+package samples
 
 sealed trait Page
 case object HomePage                                              extends Page

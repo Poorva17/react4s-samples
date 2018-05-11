@@ -1,8 +1,8 @@
-package com.github.ahnfelt.react4s.samples.CommentListExample.connector
+package samples.CommentListExample.connector
 
 import com.github.ahnfelt.react4s._
-import com.github.ahnfelt.react4s.samples.CommentListExample.Notification.Notification
-import com.github.ahnfelt.react4s.samples.CommentListExample.commentList.{CommentBox, NotificationEvent}
+import samples.CommentListExample.Notification.Notification
+import samples.CommentListExample.commentList.{CommentBox, NotificationEvent}
 
 case class Connector() extends Component[NoEmit] {
 

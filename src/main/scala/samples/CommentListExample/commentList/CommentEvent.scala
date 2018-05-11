@@ -1,4 +1,4 @@
-package com.github.ahnfelt.react4s.samples.CommentListExample.commentList
+package samples.CommentListExample.commentList
 
 import com.github.ahnfelt.react4s.Get
 

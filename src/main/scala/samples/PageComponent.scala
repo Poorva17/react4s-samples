@@ -1,8 +1,8 @@
-package com.github.ahnfelt.react4s.samples
+package samples
 
 import com.github.ahnfelt.react4s._
-import com.github.ahnfelt.react4s.samples.CommentListExample.connector.Connector
-import com.github.ahnfelt.react4s.samples.theme._
+import samples.CommentListExample.connector.Connector
+import samples.theme._
 
 case class PageComponent(page: P[Page]) extends Component[NoEmit] {
 

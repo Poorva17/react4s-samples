@@ -1,4 +1,4 @@
-package com.github.ahnfelt.react4s.samples.CommentListExample.Notification
+package samples.CommentListExample.Notification
 
 import com.github.ahnfelt.react4s._
 
