@@ -18,6 +18,8 @@ case class CommentForm() extends Component[CommentEvent] {
       A.onSubmit { e =>
         e.preventDefault()
         emit(AddComment(get(author), get(comment)))
+        author.set("")
+        comment.set("")
       }
     )
 

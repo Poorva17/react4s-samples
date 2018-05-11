@@ -8,20 +8,10 @@ object Routes {
 
   val router = path(
     HomePage,
-    path("support", SupportPage),
-    path("minimal-project", MinimalProjectPage),
-    path("gotchas", GotchasPage),
     path(
       "examples",
       ExamplesPage,
-      path("todo-list", TodoListPage),
       path("comment-list", CommentListPage),
-      path("tree-editor", TreeEditorPage),
-      path("css-class", CssClassPage),
-      path("spotify-search", SpotifyPage),
-      path("timer", TimerPage),
-      path("websockets", WebSocketsPage),
-      path("react-js", ReactJsPage)
     )
   )
 
